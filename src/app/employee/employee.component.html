@@ -1,0 +1,141 @@
+<div class="container-fluid">
+    <div class="row header">
+        <div class="col-6">
+            <h4 class="text-white">Employee Portal</h4>
+        </div>
+        <div class="col-6 text-end">
+            <button class="btn btn-outline-info" (click)="openModel()">Add Employee</button>
+        </div>
+
+    </div>
+    <div class="row">
+        @for (emp of employeeList; track $index) {<div class="col-3">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-6">
+                            {{emp.name | uppercase}}
+                        </div>
+                        <div class="col-6 text-end">
+                            {{emp.mobile}}
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p><b>Email : </b><span style="float: right;">{{emp.email}}</span></p>
+                    <p><span><b>Gender : </b>{{emp.gender}}</span><span style="float:right;"><b> DOJ:
+                            </b>{{emp.doj}}</span></p>
+                    <p><b>Address :</b><span style="float:right;">{{emp.address}}</span></p>
+                    <p><b>Status :</b><span style="float: right;">{{emp.status ? 'Active':'InActive'}}</span></p>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-6">
+                            <i (click)="onEditEmployee(emp)" class="btn fa fa-edit text-primary"
+                                style="font-size: 25px;"></i>
+                        </div>
+                        <div class="col-6 text-end">
+                            <i (click)="onDeleteEmployee(emp)"class="btn fa fa-trash text-danger" style="font-size: 25px;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>}
+
+
+        <div class="modal" id="myModal" #myModal>
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        @if(employeeObj.id==0){
+                            
+                        <h4 class="modal-title">Add Employee</h4>
+
+                        }
+                        @else {
+                        <h4 class="modal-title">Update Employee</h4>
+
+                        }
+
+                        <button type="button" class="btn-close" (click)="closeModel()"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12"></div>
+                            <input type="text" [(ngModel)]="employeeObj.name" class="form-control" placeholder="Name"
+                                name="name">
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <input type="text" [(ngModel)]="employeeObj.email" class="form-control"
+                                    placeholder="Email" name="email">
+                            </div>
+                            <div class="col-6">
+                                <input type="text" [(ngModel)]="employeeObj.mobile" class="form-control"
+                                    placeholder="Mobile" name="mobile">
+                            </div>
+
+                        </div>
+
+
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <select class="form-control" [(ngModel)]="employeeObj.gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <input type="date" [(ngModel)]="employeeObj.doj" class="form-control" placeholder="DOJ"
+                                    name="doj">
+                            </div>
+
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <textarea cols="5" rows="3" [(ngModel)]="employeeObj.address" type="text"
+                                        placeholder="Address" class="form-control "></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" [(ngModel)]="employeeObj.status"
+                                            class="form-check-input">
+                                        <label>Active</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+                        @if(employeeObj.id==0){
+                        <button type="button" class="btn btn-primary" (click)="onSaveform()">Save</button>
+
+                        }
+                        @else{
+                        <button type="button" class="btn btn-primary" (click)="onUpdateform()">Update</button>
+
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
