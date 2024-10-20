@@ -7,11 +7,11 @@
     margin-top: 10px;
 }
 .card-header{
-    background: linear-gradient(120deg, black, #007aa7);
+    background: linear-gradient(120deg, #3d32be, #032f39);
     color: white;
 }
 .modal-header{
-    background: linear-gradient(black, #007aa7);
+    background: linear-gradient(#3d32be, #032f39);
     color: white;
 
 }
